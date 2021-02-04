@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+Dog.destroy_all
+DogSitter.destroy_all
+City.destroy_all
+
+100.times do
+  dog = Dog.create!(name: Faker::GreekPhilosophers.name)
+  dog_sitter = DogSitter.create!(name: Faker::Name.first_name)
+  city = City.create!(name: Faker::Address.city)
+end
+
+100.times do
+  stroll = Stroll.create!(
+    dog_id: Dog.all.sample.id, 
+    dog_sitter_id: DogSitter.all.sample.id,
+    city_id: City.all.sample.id)
+end
